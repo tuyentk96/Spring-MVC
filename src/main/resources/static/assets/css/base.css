@@ -4,6 +4,10 @@
     --text-color:#333;
     --primary-color: #EE4D2D;
     --border-color:#dbdbdb;
+
+    --navbar-height: 34px;
+    --header--height: 120px;
+    --header-with-search-height: calc(var(var(--header--height)-var(var(--navbar-height))))
 }
 
 * {
@@ -82,7 +86,7 @@ html {
     text-decoration: none;
     border: none;
     border-radius: 3px;
-    min-width: 142px;
+    min-width: 124px;
     min-height: 34px;
     font-size: 1.4rem;
     padding: 0 8px;
