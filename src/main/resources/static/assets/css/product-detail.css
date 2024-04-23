@@ -1,0 +1,149 @@
+
+.navigate {
+    height: 42px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.04);
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto 36px;
+    font-size: 1.8rem;
+    border-radius: 2px;
+}
+
+.navigate-current-page {
+    color: #CCC;
+}
+
+.navigate a {
+    margin-left: 8px;
+}
+
+.navigate span {
+    margin-left: 4px;
+}
+
+.navigate-product-detail {
+    margin: 0 4px 0 auto;
+    background-color: var(--primary-color);
+}
+
+.navigate-product-detail-link {
+    text-decoration: none;
+    color: var(--white-color);
+}
+
+
+.app_container {
+    background-color: #F5F5F5;
+    padding: 36px;
+}
+
+.product-detail {
+    background-color: rgba(0, 0, 0, 0.04);
+    width: 1200px;
+    margin: 0 auto 36px;
+    padding: 24px;
+}
+
+.grid__column-4 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 33.3334%;
+}
+
+.grid__column-8 {
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 66.6667%;
+}
+
+.product-image {
+    padding-top: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+
+.product-detail-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+
+.product-detail-price-old {
+    margin-left: 10px;
+    font-size: 2.4rem;
+    color: #666;
+    text-decoration: line-through;
+}
+
+.product-detail-price-current {
+    font-size: 2.6rem;
+    color: var(--primary-color);
+    margin-left: 10px;
+}
+
+.product-detail-list {
+    display: flex;
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin: 24px;
+}
+
+.product-detail-left {
+    width: 250px;
+}
+
+
+.product-detail-left-name {
+    width: 250px;
+    font-size: 3.0rem;
+}
+
+.product-detail-right-name {
+    font-size: 3.0rem;
+}
+
+.product-detail-qty-label {
+    width: 250px;
+}
+
+.product-detail-form {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin: 24px;
+}
+
+.product-detail-qty {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    height: 40px;
+}
+
+.product-detail-qty-minus {
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+}
+
+.product-detail-qty-text {
+    height: 40px;
+    width: 40px;
+    text-align: center;
+}
+
+.product-detail-qty-plus {
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+}
+
+.product-detail-btn {
+    margin-top: 18px;
+    font-size: 2.0rem;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
