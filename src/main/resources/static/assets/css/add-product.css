@@ -90,3 +90,8 @@
     text-decoration: none;
     color: var(--white-color);
 }
+
+.new-product-select {
+    width: 200px;
+    text-align: center;
+}

@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="/static/assets/css/base.css">
-    <link rel="stylesheet" href="/static/assets/css/add-product.css">
-    <link rel="stylesheet" href="/static/assets/fonts/fontawesome-free-6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/add-product.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.5.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -44,7 +44,7 @@
 
                         <!-- Login successfuly -->
                         <li class="header__navbar-item header_navbar-user">
-                            <img src="/static/assets/img/user-img.png" alt="" class="header__navbar-user-img">
+                            <img src="/assets/img/user-img.png" alt="" class="header__navbar-user-img">
                             <span class="header__navbar-user-name">Đỗ Tuyến</span>
 
                             <ul class="header__navbar-user-menu">
@@ -90,7 +90,7 @@
                             <div class="header__cart-list">
                                 <!-- No cart:  header__cart-list--no-cart -->
                                 <div class="header__cart-list--no-cart">
-                                    <img src="/static/assets/img/cart-empty-img.8b677cb3.png" alt="" class="header__cart-no-cart-img">
+                                    <img src="/assets/img/cart-empty-img.8b677cb3.png" alt="" class="header__cart-no-cart-img">
                                     <span class="header__cart-list-no-cart-msg">
                                         Chưa có sản phẩm
                                     </span>
@@ -101,7 +101,7 @@
                                     <ul class="header__cart-list-item">
                                         <!-- Car titem -->
                                         <li class="header__cart-item">
-                                            <img src="/static/assets/img/sg-11134201-22100-1kq9pey7d2iv3f_tn.jpg" alt="" class="header__car-img">
+                                            <img src="/assets/img/sg-11134201-22100-1kq9pey7d2iv3f_tn.jpg" alt="" class="header__car-img">
                                             <div class="header__cart-item-info">
                                                 <div class="header__cart-item-head">
                                                     <h5 class="header__cart-item-name">Bộ kem đặc trị vùng mắt</h5>
@@ -118,7 +118,7 @@
                                             </div>
                                         </li>
                                         <li class="header__cart-item">
-                                            <img src="/static/assets/img/sg-11134201-22100-1kq9pey7d2iv3f_tn.jpg" alt="" class="header__car-img">
+                                            <img src="/assets/img/sg-11134201-22100-1kq9pey7d2iv3f_tn.jpg" alt="" class="header__car-img">
                                             <div class="header__cart-item-info">
                                                 <div class="header__cart-item-head">
                                                     <h5 class="header__cart-item-name">Bộ kem đặc trị vùng mắt</h5>
@@ -135,7 +135,7 @@
                                             </div>
                                         </li>
                                         <li class="header__cart-item">
-                                            <img src="/static/assets/img/sg-11134201-22100-1kq9pey7d2iv3f_tn.jpg" alt="" class="header__car-img">
+                                            <img src="/assets/img/sg-11134201-22100-1kq9pey7d2iv3f_tn.jpg" alt="" class="header__car-img">
                                             <div class="header__cart-item-info">
                                                 <div class="header__cart-item-head">
                                                     <h5 class="header__cart-item-name">Bộ kem đặc trị vùng mắt</h5>
@@ -167,43 +167,49 @@
                 <a href="/templates/home.html">Trang chủ </a><span> / </span><span class="navigate-current-page">Thêm sản phẩm</span>
                 <div class="btn navigate-product-manager"><a class="navigate-product-manager-link" href="#">Trở lại quản lý sản phẩm</a></div>
             </div>
-            <form action="#">
+            <form th:action="@{/product/add-product/process}" th:object="${product}" method="POST">
                 <div class="new-product">
                     <div class="new-product-left">
                         <div class="new-product-items">
                             <label class="new-product-left-label" for="name">Tên sản phẩm</label>
-                            <input id="name" type="text" placeholder="Nhập tên sản phẩm">
+                            <input th:field="*{name}" id="name" type="text" placeholder="Nhập tên sản phẩm">
                         </div>
                         <div class="new-product-items">
                             <label class="new-product-left-label" for="image">Hình ảnh</label>
-                            <input id="image" type="file">
+                            <input th:field="*{image}" id="image" type="file">
                         </div>
                         <div class="new-product-items">
                             <label class="new-product-left-label" for="decription">Mô tả</label>
-                            <input id="decription" type="text" placeholder="Nhập mô tả sản phẩm">
+                            <input th:field="*{description}" id="decription" type="text" placeholder="Nhập mô tả sản phẩm">
                         </div>
                         <div class="new-product-items">
                             <label class="new-product-left-label" for="price">Giá</label>
-                            <input id="price" type="text" placeholder="Nhập giá sản phẩm">
+                            <input th:field="*{price}" id="price" type="text" placeholder="Nhập giá sản phẩm">
+                        </div>
+                        <div class="new-product-items">
+                            <label class="new-product-left-label" for="category">Danh mục sản phẩm</label>
+                            <select th:field="*{category}" class="new-product-select" name="" id="category">
+                                <option  th:each="e:${categories}" th:value="${e}"><span th:text="${e.name}"></span></option>
+                            </select>
                         </div>
                     </div>
                     <div class="new-product-right">
                         
                         <div class="new-product-items">
                             <label class="new-product-right-label" for="sale">Giảm giá (%)</label>
-                            <input id="sale" type="text" placeholder="Nhập phân trăm giảm giá sản phẩm">
+                            <input th:field="*{sale}" id="sale" type="text" placeholder="Nhập phân trăm giảm giá sản phẩm">
                         </div>
                         <div class="new-product-items">
                             <label class="new-product-right-label" for="color">Màu sắc</label>
-                            <input id="color" type="text" placeholder="Nhập màu sắc sản phẩm">
+                            <input id="color" th:field="*{color}" type="text" placeholder="Nhập màu sắc sản phẩm">
                         </div>
                         <div class="new-product-items">
                             <label class="new-product-right-label" for="brand">Thương hiệu</label>
-                            <input id="brand" type="text" placeholder="Nhập thương hiệu sản phẩm">
+                            <input id="brand" th:field="*{brand}" type="text" placeholder="Nhập thương hiệu sản phẩm">
                         </div>
                         <div class="new-product-items">
                             <label class="new-product-right-label" for="origin">Xuất sứ</label>
-                            <input id="origin" type="text" placeholder="Nhập xuất sứ sản phẩm">
+                            <input id="origin" th:field="*{origin}" type="text" placeholder="Nhập xuất sứ sản phẩm">
                         </div>
                         <button type="submit" class="btn new-product-button">Thêm sản phẩm</button>
                     </div>
@@ -390,6 +396,6 @@
             </div>
         </div>
     </div>
-    <script src="/static/assets/script/main.js"></script>
+    <script src="/assets/script/main.js"></script>
 </body>
 </html>

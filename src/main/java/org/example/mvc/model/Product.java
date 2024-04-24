@@ -24,6 +24,21 @@ public class Product extends BaseEntity{
     @Column(name = "price",nullable = false)
     private Float price;
 
+    @Column(name = "image")
+    private String image;
+
+    @Column(name = "sale")
+    private Float sale;
+
+    @Column(name = "color")
+    private String color;
+
+    @Column(name = "brand")
+    private String brand;
+
+    @Column(name = "origin")
+    private String origin;
+
     @Column(name = "description")
     private String description;
 

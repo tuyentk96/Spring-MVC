@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="/static/assets/css/base.css">
-    <link rel="stylesheet" href="/static/assets/css/main.css">
-    <link rel="stylesheet" href="/static/assets/fonts/fontawesome-free-6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.5.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -44,7 +44,7 @@
 
                         <!-- Login successfuly -->
                         <li class="header__navbar-item header_navbar-user">
-                            <img src="/static/assets/img/user-img.png" alt="" class="header__navbar-user-img">
+                            <img src="/assets/img/user-img.png" alt="" class="header__navbar-user-img">
                             <span class="header__navbar-user-name">Đỗ Tuyến</span>
 
                             <ul class="header__navbar-user-menu">
@@ -90,7 +90,7 @@
                             <div class="header__cart-list">
                                 <!-- No cart:  header__cart-list--no-cart -->
                                 <div class="header__cart-list--no-cart">
-                                    <img src="/static/assets/img/cart-empty-img.8b677cb3.png" alt="" class="header__cart-no-cart-img">
+                                    <img src="/assets/img/cart-empty-img.8b677cb3.png" alt="" class="header__cart-no-cart-img">
                                     <span class="header__cart-list-no-cart-msg">
                                         Chưa có sản phẩm
                                     </span>
@@ -101,7 +101,7 @@
                                     <ul class="header__cart-list-item">
                                         <!-- Car titem -->
                                         <li class="header__cart-item">
-                                            <img src="/static/assets/img/sg-11134201-22100-1kq9pey7d2iv3f_tn.jpg" alt="" class="header__car-img">
+                                            <img src="/assets/img/sg-11134201-22100-1kq9pey7d2iv3f_tn.jpg" alt="" class="header__car-img">
                                             <div class="header__cart-item-info">
                                                 <div class="header__cart-item-head">
                                                     <h5 class="header__cart-item-name">Bộ kem đặc trị vùng mắt</h5>
@@ -118,7 +118,7 @@
                                             </div>
                                         </li>
                                         <li class="header__cart-item">
-                                            <img src="/static/assets/img/sg-11134201-22100-1kq9pey7d2iv3f_tn.jpg" alt="" class="header__car-img">
+                                            <img src="/assets/img/sg-11134201-22100-1kq9pey7d2iv3f_tn.jpg" alt="" class="header__car-img">
                                             <div class="header__cart-item-info">
                                                 <div class="header__cart-item-head">
                                                     <h5 class="header__cart-item-name">Bộ kem đặc trị vùng mắt</h5>
@@ -135,7 +135,7 @@
                                             </div>
                                         </li>
                                         <li class="header__cart-item">
-                                            <img src="/static/assets/img/sg-11134201-22100-1kq9pey7d2iv3f_tn.jpg" alt="" class="header__car-img">
+                                            <img src="/assets/img/sg-11134201-22100-1kq9pey7d2iv3f_tn.jpg" alt="" class="header__car-img">
                                             <div class="header__cart-item-info">
                                                 <div class="header__cart-item-head">
                                                     <h5 class="header__cart-item-name">Bộ kem đặc trị vùng mắt</h5>
@@ -172,15 +172,9 @@
                                 Danh mục
                             </h3>
                         
-                            <ul class="category-list">
-                                <li class="category-item category-item--active">
-                                    <a href="#" class="category-item__link">Trang điểm mặt</a>
-                                </li>
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Trang điểm môi</a>
-                                </li>
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Trang điểm mắt</a>
+                            <ul class="category-list" >
+                                <li class="category-item" th:each="e:${categories}">
+                                    <a class="category-item__link" th:href="@{'/product/categories/'+${e.id}}" th:text="${e.name}"></a>
                                 </li>
                             </ul>
                         </nav>
@@ -491,6 +485,12 @@
             </div>
         </div>
     </div>
-    <script src="/static/assets/script/main.js"></script>
+    <script src="/assets/script/main.js"></script>
+    <script>
+        function categoriesItemActive(itemId) {
+            var categoryActive = document.getElementById(itemId);
+            categoryActive.className="category-item category-item--active";
+        }
+    </script>
 </body>
 </html>
