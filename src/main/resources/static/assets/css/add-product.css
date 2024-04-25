@@ -35,7 +35,7 @@
     font-size: 1.8rem;
     display: inline-flex;
     justify-content: space-between;
-    
+
 }
 
 .new-product-left {
@@ -72,6 +72,11 @@
     margin: 36px;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+.new-product-items input{
+    margin: 8px 0;
 }
 
 .new-product-button {
@@ -94,4 +99,8 @@
 .new-product-select {
     width: 200px;
     text-align: center;
+}
+
+.new-product-items-errors {
+    color: red;
 }

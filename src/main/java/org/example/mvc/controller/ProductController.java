@@ -1,16 +1,23 @@
 package org.example.mvc.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.mvc.dto.CreateProductRequest;
+import org.example.mvc.dto.ProductDto;
 import org.example.mvc.model.Category;
 import org.example.mvc.model.Product;
 import org.example.mvc.service.CategoryService;
 import org.example.mvc.service.ProductService;
+import org.springframework.boot.Banner;
+import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
+import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -21,7 +28,9 @@ public class ProductController {
     private final CategoryService categoryService;
     private final ProductService productService;
     @GetMapping("")
-    public String productManager() {
+    public String productManager(Model model) {
+        List<Product> products = productService.getAllProduct();
+        model.addAttribute("products", products);
         return "product-manager";
     }
 
@@ -29,16 +38,51 @@ public class ProductController {
     public String addProduct(Model model){
         List<Category> categories = categoryService.getAllCategory();
         model.addAttribute("categories", categories);
-        CreateProductRequest product = new CreateProductRequest();
-        model.addAttribute("product", product);
+        ProductDto productDto = new ProductDto();
+        model.addAttribute("productDto", productDto);
         return "add-product";
+    }
+    @GetMapping("/delete")
+    public String deleteProduct(@RequestParam("id") Long id){
+        productService.deleteProduct(id);
+        return "redirect:/product";
     }
 
     @RequestMapping(value = "/add-product/process",method = RequestMethod.POST)
-    public String addProductProcess(@ModelAttribute CreateProductRequest createProductRequest, Model model) throws IOException {
+    public String addProductProcess(@Valid @ModelAttribute ProductDto productDto, BindingResult result,Model model) {
+        String contentType = productDto.getImage().getContentType();
 
-        List<String> errors = productService.addProduct(createProductRequest);
+        if (productDto.getImage().isEmpty()){
+            result.addError(new FieldError("productDto", "image", "Vui lòng nhập hình ảnh cho sản phẩm"));
+        }else if (contentType == null || !contentType.startsWith("image/")){
+            result.addError(new FieldError("productDto", "image", "Định dạng file không đúng"));
+        }
 
-        return "product-manager";
+        if (productDto.getImage().getSize()> 10*1024*1024){
+            result.addError(new FieldError("productDto", "image", "Kích thước hình ảnh quá lớn"));
+        }
+
+        if (result.hasErrors()){
+            List<Category> categories = categoryService.getAllCategory();
+            model.addAttribute("categories", categories);
+            return "/add-product";
+        }
+
+       productService.addProduct(productDto);
+
+        return "redirect:/product";
+    }
+
+
+
+    @GetMapping("/fake")
+    public String fake(){
+        return "fake-product/fake";
+    }
+
+    @PostMapping(value = "/fake-product",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String fakeProductWithExcel(@ModelAttribute MultipartFile file) throws IOException {
+        productService.fakeProductWithExcel(file);
+        return "redirect:/product";
     }
 }

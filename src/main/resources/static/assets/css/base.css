@@ -739,6 +739,7 @@ html {
   }
 
   .select-input__list {
+    z-index: 1;
     position: absolute;
     left: 0;
     right: 0;
@@ -751,6 +752,7 @@ html {
 }
 
 .select-input:hover .select-input__list {
+  z-index: 1;
   display: block;
 }
 
