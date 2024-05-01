@@ -152,4 +152,9 @@ public class ProductServiceImpl implements ProductService {
         }
         productDAO.saveAll(products);
     }
+
+    @Override
+    public Product findById(Long id) {
+        return productDAO.findById(id).orElseThrow();
+    }
 }

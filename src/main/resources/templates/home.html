@@ -228,7 +228,7 @@
                             <div class="grid__row">
                                 <!-- Product Item -->
                                 <div class="grid__column-2-4" th:each="e:${products}">
-                                    <a href="#" class="home-product-item">
+                                    <a th:href="@{'/product/detail?id='+${e.id}}" class="home-product-item">
                                         <div class="home-product-item__img" th:style="${'background-image: url(/assets/img/' + e.image + ');'}"></div>
                                         <h4 class="home-product-item__name" th:text="${e.name}" ></h4>
                                         <div class="home-product-item__price">

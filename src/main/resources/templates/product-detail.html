@@ -171,32 +171,32 @@
                 <div class="grid">
                     <div class="grid__row">
                         <div class="grid__column-4">
-                            <div class="product-image" style="background-image: url(/assets/img/sg-11134201-22100-1kq9pey7d2iv3f_tn.jpg);"></div>
+                            <div class="product-image" th:style="${'background-image: url(/assets/img/' + product.image + ');'}"></div>
                         </div>
                         <div class="grid__column-8">
                             <div class="product-detail-list">
                                 <span class="product-detail-left-name">Tên sản phẩm: </span>
-                                <strong class="product-detail-right-name">Giày thể thao</strong>
+                                <strong class="product-detail-right-name" th:text="${product.name}"></strong>
                             </div>
                             <div class="product-detail-list">
-                                <span class="product-detail-price-old">1.200.000đ</span>
-                                <span class="product-detail-price-current">999.000đ</span>
+                                <span class="product-detail-price-old" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' ₫'"></span>
+                                <span class="product-detail-price-current" th:text="${#numbers.formatDecimal(product.price - product.price*product.sale/100, 0, 'COMMA', 0, 'POINT')} + ' ₫'"></span>
                             </div>
                             <div class="product-detail-list">
                                 <span class="product-detail-left">Mô tả sản phẩm: </span>
-                                <span class="product-detail-right">Đây là phần mô tả sản phẩm</span>
+                                <span class="product-detail-right" th:text="${product.description}"></span>
                             </div>
                             <div class="product-detail-list">
                                 <span class="product-detail-left">Màu sắc: </span>
-                                <span class="product-detail-right">Đây là phần màu sắc</span>
+                                <span class="product-detail-right" th:text="${product.color}"></span>
                             </div>
                             <div class="product-detail-list">
                                 <span class="product-detail-left">Thương hiệu sản phẩm: </span>
-                                <span class="product-detail-right">Đây là phần thương hiệu sản phẩm</span>
+                                <span class="product-detail-right" th:text="${product.brand}"></span>
                             </div>
                             <div class="product-detail-list">
                                 <span class="product-detail-left">Xuất sứ sản phẩm: </span>
-                                <span class="product-detail-right">Đây là phần xuất sứ sản phẩm</span>
+                                <span class="product-detail-right" th:text="${product.origin}"></span>
                             </div>
                             <form action="" class="product-detail-form">
                                 <div class="product-detail-qty">

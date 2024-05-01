@@ -19,4 +19,6 @@ public interface ProductService {
     Page<Product> getAllProductPage(String keyword, PageRequest pageRequest, Long categoryId);
 
     void fakeProductWithExcel(MultipartFile file) throws IOException;
+
+    Product findById(Long id);
 }

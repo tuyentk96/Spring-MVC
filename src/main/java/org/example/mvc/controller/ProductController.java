@@ -73,6 +73,13 @@ public class ProductController {
         return "redirect:/product";
     }
 
+    @GetMapping("/detail")
+    public String detailProduct(@RequestParam("id") Long id,Model model){
+        Product product = productService.findById(id);
+        model.addAttribute("product", product);
+        return "product-detail";
+    }
+
 
 
     @GetMapping("/fake")
