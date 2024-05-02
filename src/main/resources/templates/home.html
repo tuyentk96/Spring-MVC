@@ -266,7 +266,7 @@
                 <!-- Login form -->
                 <div class="modal__body">
                     <div class="auth-form">
-                        <form class="auth-form__container" th:action="@{/login}" method="post">
+                        <form class="auth-form__container" th:action="@{/login}" method="POST">
                             <div class="auth-form__header">
                                 <h3 class="auth-form__heading">Đăng nhập</h3>
                                 <span class="auth-form__switch-btn" id="form__login-click">Đăng ký</span>
@@ -322,10 +322,10 @@
                                     <input type="text" th:field="*{username}" class="auth-form__input" placeholder="Tài khoản">
                                 </div>
                                 <div class="auth-form__group">
-                                    <input type="text" th:field="*{password}" class="auth-form__input" placeholder="Mật khẩu">
+                                    <input type="password" th:field="*{password}" class="auth-form__input" placeholder="Mật khẩu">
                                 </div>
                                 <div class="auth-form__group">
-                                    <input type="text" th:field="*{retypePassword}" class="auth-form__input" placeholder="Nhập lại mật khẩu">
+                                    <input type="password" th:field="*{retypePassword}" class="auth-form__input" placeholder="Nhập lại mật khẩu">
                                 </div>
                             </div>
                             <div class="auth-form__aside">

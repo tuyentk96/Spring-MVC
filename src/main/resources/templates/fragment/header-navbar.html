@@ -35,7 +35,8 @@
                     <a href="">Tài khoản của tôi</a>
                     <a href="">Địa chỉ của tôi</a>
                     <a href="">Đơn mua</a>
-                    <a href="">Đăng xuất</a>
+                    <form th:action="@{/logout}">
+                        <button type="submit">Đăng xuất</button></form>
                 </li>
             </ul>
         </li>

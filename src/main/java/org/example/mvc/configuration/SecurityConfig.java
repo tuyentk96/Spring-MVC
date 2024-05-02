@@ -1,57 +1,55 @@
 package org.example.mvc.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.mvc.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+
 
     @Bean
-    public static PasswordEncoder passwordEncoder(){
+    public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider(UserService userService){
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setUserDetailsService(userService);
+        daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
+        return daoAuthenticationProvider;
+    }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/register/**").permitAll()
-                                .requestMatchers("/index").permitAll()
+                        authorize.requestMatchers("/index",
+                                        "/login**",
+                                        "/register**",
+                                        "/assets/**").permitAll()
                                 .requestMatchers("/product").hasRole("ADMIN")
                                 .requestMatchers("/product/add-product").hasRole("ADMIN")
                                 .anyRequest().permitAll()
-                ).formLogin(
+                )
+                .formLogin(
                         form -> form
-                                .loginPage("/")
-                                .loginProcessingUrl("/")
+                                .loginProcessingUrl("/login")
+                                .defaultSuccessUrl("/index")
                                 .permitAll()
                 ).logout(
-                        logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .permitAll()
+                        LogoutConfigurer::permitAll
                 )
                 .csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
-    }
 }

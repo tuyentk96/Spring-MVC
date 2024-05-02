@@ -19,6 +19,11 @@ public class UserController {
     @PostMapping("/register")
     public String register(@ModelAttribute UserDto userDto) {
         userService.saveUser(userDto);
-        return "redirect:/";
+        return "redirect:/index";
+    }
+
+    @PostMapping("/login")
+    public String login(){
+        return "redirect:/index";
     }
 }
