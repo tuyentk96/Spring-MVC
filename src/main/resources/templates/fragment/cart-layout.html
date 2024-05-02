@@ -1,0 +1,40 @@
+<div class="header__cart">
+    <div class="header__cart-wrap">
+        <i class="header__cart-icon fa-solid fa-cart-shopping"></i>
+        <span class="header__cart-notice" th:if="!${session.Cart}">0</span>
+        <span class="header__cart-notice" th:if="${session.Cart}" th:text="${session.Cart.size()}"></span>
+        <div class="header__cart-list">
+            <!--  No cart:  header__cart-list&#45;&#45;no-cart -->
+            <div class="header__cart-list--no-cart" th:if="!${session.Cart}">
+                <img src="/assets/img/cart-empty-img.8b677cb3.png" alt="" class="header__cart-no-cart-img">
+                <span class="header__cart-list-no-cart-msg">Chưa có sản phẩm</span>
+            </div>
+            <!--   Has cart:  header__cart-list&#45;&#45;has-cart -->
+            <div class="header__cart-list--has-cart" th:if="${session.Cart}">
+                <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
+                <ul class="header__cart-list-item" >
+                    <!-- Car titem -->
+                    <li class="header__cart-item" th:each="cartItem:${session.Cart}">
+                        <img th:src="@{'/assets/img/'+${cartItem.value.product.getImage()}}" alt="" class="header__car-img">
+                        <div class="header__cart-item-info">
+                            <div class="header__cart-item-head">
+                                <h5 class="header__cart-item-name" th:text="${cartItem.value.product.name}"></h5>
+                                <div class="header__cart-item-price-wrap">
+                                    <span class="header__cart-item-price" th:text="${#numbers.formatDecimal(cartItem.value.product.price - cartItem.value.product.price*cartItem.value.product.sale/100, 0, 'COMMA', 0, 'POINT')} + ' ₫'"></span>
+                                    <span class="header__cart-item-multiply">x</span>
+                                    <span class="header__cart-item-quantity" th:text="${cartItem.value.quantity}"></span>
+                                </div>
+                            </div>
+                            <div class="header__cart-item-body">
+                                <span class="header__cart-item-decription" th:text="'Phân loại: ' + ${cartItem.value.product.category.name}"></span>
+                                <a th:href="@{'/deleteCart?id='+${cartItem.value.product.id}}" class="header__cart-item-remove">Xóa</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <button class="header__cart-view-cart btn btn--primary"><a href="/cart" class="header__cart-view-cart-link" >Xem giỏ hàng</a></button>
+            </div>
+        </div>
+    </div>
+
+</div>

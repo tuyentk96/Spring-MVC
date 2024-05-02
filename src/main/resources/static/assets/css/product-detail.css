@@ -147,3 +147,8 @@
     background-color: var(--primary-color);
     color: var(--white-color);
 }
+
+.add-cart-link {
+    text-decoration: none;
+    color: var(--white-color);
+}

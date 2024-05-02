@@ -364,11 +364,9 @@ html {
 
 .header__cart-no-cart-img {
   width: 50%;
-  display: none;
 }
 
 .header__cart-list-no-cart-msg {
-  display: none;
   font-size: 1.4rem;
   margin-top: 14px;
   color: var(--text-color);
@@ -376,7 +374,7 @@ html {
 
 .header__cart-list--no-cart {
   padding: 24px 0;
-  display: none;
+  display: block;
 }
 
 .header__cart-list--has-cart {
@@ -873,3 +871,9 @@ html {
   margin: auto;
   padding: 12px;
 }
+
+.header__cart-view-cart-link {
+  text-decoration: none;
+  color: var(--white-color);
+}
+

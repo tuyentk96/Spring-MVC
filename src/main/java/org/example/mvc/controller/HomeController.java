@@ -1,13 +1,14 @@
 package org.example.mvc.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.mvc.dto.UserDto;
 import org.example.mvc.model.Category;
 import org.example.mvc.model.Product;
+import org.example.mvc.model.User;
 import org.example.mvc.service.CategoryService;
 import org.example.mvc.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,6 +51,9 @@ public class HomeController {
         Page<Product> productPage = productService.getAllProductPage(keyword,pageRequest,categoryId);
         List<Product> products = productPage.getContent();
         int totalPage = productPage.getTotalPages();
+
+        UserDto userDto = new UserDto();
+        model.addAttribute("userDto", userDto);
 
         model.addAttribute("products", products);
         model.addAttribute("totalPage", totalPage);

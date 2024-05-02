@@ -16,48 +16,8 @@
 <div class="app">
     <header class="header">
         <div class="grid">
-            <nav class="header__navbar">
-                <ul class="header__navbar-list">
-                    <li class="header__navbar-item header__navbar-item--separate">Trang web chính thức của cửa hàng </li>
-                    <li class="header__navbar-item">
-                        <span class="header__navbar-title--no-pointer">Kết nối</span>
-                        <a class="header__navbar-icon-link" href="#"><i class="header__navbar-icon fa-brands fa-facebook"></i></a>
-                        <a class="header__navbar-icon-link" href="#"><i class="fa-brands fa-instagram fa-lg"></i></a>
-                    </li>
-                </ul>
-
-                <ul class="header__navbar-list">
-                    <li class="header__navbar-item">
-                        <a class="header__navbar-item-link" href="#">
-                            <i class="header__navbar-icon fa-solid fa-bell"></i> Thông báo
-                        </a>
-                    </li>
-                    <li class="header__navbar-item">
-                        <a class="header__navbar-item-link" href="#">
-                            <i class="header__navbar-icon fa-solid fa-question"></i> Trợ giúp
-                        </a>
-                    </li>
-                    <!-- none login -->
-
-                    <!--                <li class="header__navbar-item header__navbar-item&#45;&#45;strong header__navbar-item&#45;&#45;separate" id="navbar__register-form" >Đăng ký</li>-->
-                    <!--                <li class="header__navbar-item header__navbar-item&#45;&#45;strong" id="navbar__login-form">Đăng nhập</li>-->
-
-                    <!-- Login successfuly -->
-                    <li class="header__navbar-item header_navbar-user">
-                        <img src="/assets/img/user-img.png" alt="" class="header__navbar-user-img">
-                        <span class="header__navbar-user-name">Đỗ Tuyến</span>
-
-                        <ul class="header__navbar-user-menu">
-                            <li class="header__navbar-user-item">
-                                <a href="">Tài khoản của tôi</a>
-                                <a href="">Địa chỉ của tôi</a>
-                                <a href="">Đơn mua</a>
-                                <a href="">Đăng xuất</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
+            <!-- Header Navbar -->
+            <div th:include="fragment/header-navbar"></div>
             <!-- Header with search -->
             <div class="header-with-search">
                 <div class="header__logo">
@@ -82,82 +42,7 @@
                     </a>
                 </div>
                 <!-- Cart layout -->
-                <div class="header__cart">
-                    <div class="header__cart-wrap">
-                        <i class="header__cart-icon fa-solid fa-cart-shopping"></i>
-                        <span class="header__cart-notice">3</span>
-
-                        <div class="header__cart-list">
-                            <!-- No cart:  header__cart-list--no-cart -->
-                            <div class="header__cart-list--no-cart">
-                                <img src="/assets/img/cart-empty-img.8b677cb3.png" alt="" class="header__cart-no-cart-img">
-                                <span class="header__cart-list-no-cart-msg">
-                                        Chưa có sản phẩm
-                                    </span>
-                            </div>
-                            <!-- Has cart:  header__cart-list--has-cart -->
-                            <div class="header__cart-list--has-cart">
-                                <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
-                                <ul class="header__cart-list-item">
-                                    <!-- Car titem -->
-                                    <li class="header__cart-item">
-                                        <img src="/assets/img/sg-11134201-22100-1kq9pey7d2iv3f_tn.jpg" alt="" class="header__car-img">
-                                        <div class="header__cart-item-info">
-                                            <div class="header__cart-item-head">
-                                                <h5 class="header__cart-item-name">Bộ kem đặc trị vùng mắt</h5>
-                                                <div class="header__cart-item-price-wrap">
-                                                    <span class="header__cart-item-price">2.000.000đ</span>
-                                                    <span class="header__cart-item-multiply">x</span>
-                                                    <span class="header__cart-item-quantity">2</span>
-                                                </div>
-                                            </div>
-                                            <div class="header__cart-item-body">
-                                                <span class="header__cart-item-decription">Phân loại: Bạc</span>
-                                                <span class="header__cart-item-remove">Xóa</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="header__cart-item">
-                                        <img src="/assets/img/sg-11134201-22100-1kq9pey7d2iv3f_tn.jpg" alt="" class="header__car-img">
-                                        <div class="header__cart-item-info">
-                                            <div class="header__cart-item-head">
-                                                <h5 class="header__cart-item-name">Bộ kem đặc trị vùng mắt</h5>
-                                                <div class="header__cart-item-price-wrap">
-                                                    <span class="header__cart-item-price">2.000.000đ</span>
-                                                    <span class="header__cart-item-multiply">x</span>
-                                                    <span class="header__cart-item-quantity">2</span>
-                                                </div>
-                                            </div>
-                                            <div class="header__cart-item-body">
-                                                <span class="header__cart-item-decription">Phân loại: Bạc</span>
-                                                <span class="header__cart-item-remove">Xóa</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="header__cart-item">
-                                        <img src="/assets/img/sg-11134201-22100-1kq9pey7d2iv3f_tn.jpg" alt="" class="header__car-img">
-                                        <div class="header__cart-item-info">
-                                            <div class="header__cart-item-head">
-                                                <h5 class="header__cart-item-name">Bộ kem đặc trị vùng mắt</h5>
-                                                <div class="header__cart-item-price-wrap">
-                                                    <span class="header__cart-item-price">2.000.000đ</span>
-                                                    <span class="header__cart-item-multiply">x</span>
-                                                    <span class="header__cart-item-quantity">2</span>
-                                                </div>
-                                            </div>
-                                            <div class="header__cart-item-body">
-                                                <span class="header__cart-item-decription">Phân loại: Bạc</span>
-                                                <span class="header__cart-item-remove">Xóa</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                <div th:include="fragment/cart-layout"></div>
             </div>
         </div>
     </header>

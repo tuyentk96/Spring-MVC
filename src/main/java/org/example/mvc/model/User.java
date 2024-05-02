@@ -3,8 +3,6 @@ package org.example.mvc.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
-
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "users")
@@ -21,7 +19,7 @@ public class User extends BaseEntity {
     private Long id;
 
     @Column(name = "username",unique = true,nullable = false, length = 100)
-    private String userName;
+    private String username;
 
     @Column(name = "password",nullable = false, length = 100)
     private String password;
@@ -29,4 +27,5 @@ public class User extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
 }

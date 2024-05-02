@@ -1,0 +1,43 @@
+<nav class="header__navbar">
+    <ul class="header__navbar-list">
+        <li class="header__navbar-item header__navbar-item--separate">Trang web chính thức của cửa hàng </li>
+        <li class="header__navbar-item">
+            <span class="header__navbar-title--no-pointer">Kết nối</span>
+            <a class="header__navbar-icon-link" href="#"><i class="header__navbar-icon fa-brands fa-facebook"></i></a>
+            <a class="header__navbar-icon-link" href="#"><i class="fa-brands fa-instagram fa-lg"></i></a>
+        </li>
+    </ul>
+
+    <ul class="header__navbar-list">
+        <li class="header__navbar-item">
+            <a class="header__navbar-item-link" href="#">
+                <i class="header__navbar-icon fa-solid fa-bell"></i> Thông báo
+            </a>
+        </li>
+        <li class="header__navbar-item">
+            <a class="header__navbar-item-link" href="#">
+                <i class="header__navbar-icon fa-solid fa-question"></i> Trợ giúp
+            </a>
+        </li>
+
+        <!-- none login -->
+
+        <li th:if="!${session.user}" class="header__navbar-item header__navbar-item--strong header__navbar-item--separate" id="navbar__register-form" >Đăng ký</li>
+        <li th:if="!${session.user}" class="header__navbar-item header__navbar-item--strong" id="navbar__login-form">Đăng nhập</li>
+
+        <!-- Login successfuly -->
+        <li class="header__navbar-item header_navbar-user" th:if="${session.user}">
+            <img src="/assets/img/user-img.png" alt="" class="header__navbar-user-img">
+            <span class="header__navbar-user-name" th:text="${session.user.username}"></span>
+
+            <ul class="header__navbar-user-menu">
+                <li class="header__navbar-user-item">
+                    <a href="">Tài khoản của tôi</a>
+                    <a href="">Địa chỉ của tôi</a>
+                    <a href="">Đơn mua</a>
+                    <a href="">Đăng xuất</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
