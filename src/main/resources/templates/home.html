@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xml:th="http://www.thymeleaf.org">
+<html lang="en" xml:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -88,7 +88,7 @@
                                 </ul>
                             </div>
 
-                            <button style="display: block" class="home-product-manager btn"><a class="home-product-manager-link" href="/product">Quản lý sản phẩm</a></button>
+                            <button sec:authorize="hasRole('ROLE_ADMIN')" style="display: block" class="home-product-manager btn"><a class="home-product-manager-link" href="/product">Quản lý sản phẩm</a></button>
 
                             <div class="home-filter__page">
                                 <span class="home-filter__page-num">
@@ -160,7 +160,7 @@
                             </li>
 
                             <!-- Hiển thị 6 nút chuyển trang -->
-                            <th:block th:each="pageNum: ${#numbers.sequence(productPage.number - 2 < 0 ? 0 : productPage.number - 2, productPage.number + 3 > productPage.totalPages ? productPage.totalPages : productPage.number + 3)}">
+                            <th:block th:each="pageNum: ${#numbers.sequence(productPage.number - 2 < 0 ? 0 : productPage.number - 2 , productPage.number + 3 > productPage.totalPages ? productPage.totalPages : productPage.number + 3)}">
                                 <li th:classappend="${pageNum < 1} ? 'pagination-item--disable'" class="pagination-item" th:class="${pageNum  == productPage.number + 1 ? 'pagination-item--active' : ''}">
                                     <a th:href="@{'index?category-id='+${categoryId}+'&sort='+${sort}+'&keyword='+${keyword}+'&page=' + ${pageNum}}" class="pagination-item__link"><span th:text="${pageNum}"></span></a>
                                 </li>
@@ -173,8 +173,6 @@
                                 </a>
                             </li>
                         </ul>
-
-
                     </div>
                 </div>
             </div>
@@ -257,107 +255,7 @@
                 </div>
             </div>
         </footer>
-        
-        <!-- Form Login/Register -->
-        <div class="login-register">
-            <div class="modal" id="modal_login" style="display: none;">
-                <div class="modal__overlay">
-                </div>
-                <!-- Login form -->
-                <div class="modal__body">
-                    <div class="auth-form">
-                        <form class="auth-form__container" th:action="@{/login}" method="POST">
-                            <div class="auth-form__header">
-                                <h3 class="auth-form__heading">Đăng nhập</h3>
-                                <span class="auth-form__switch-btn" id="form__login-click">Đăng ký</span>
-                            </div>
-                            
-                            <div class="auth-form__form">
-                                <div class="auth-form__group">
-                                    <input type="text"  id="username" class="auth-form__input" placeholder="Tài khoản">
-                                </div>
-                                <div class="auth-form__group">
-                                    <input type="password"  id="password" class="auth-form__input" placeholder="Mật khẩu">
-                                </div>
-                            </div>
-                            <div class="auth-form__help">
-                                <a href="#" class="auth-form__help-link auth-form__help-forgot">Quên mật khẩu</a>
-                                <span class="auth-form__help-sperate"></span>
-                                <a href="#" class="auth-form__help-link">Cần trợ giúp?</a>
-                            </div>
-                            
-                            <div class="auth-form__controls">
-                                <button class="btn btn--normal auth-form__controls-back" id="form__login-cancel">TRỞ LẠI</button>
-                                <button type="submit" class="btn btn--primary">ĐĂNG NHẬP</button>
-                            </div>
-                        </form>
-                        <div class="auth-form__socials">
-                            <a href="#" class="auth-form__socials--facebook btn btn--size-s btn--with-icon">
-                                <i class="auth-form__socials-icon fa-brands fa-square-facebook"></i>
-                                <span class="auth-form__socials-title">Kết nối với Facebook</span>
-                            </a>
-                            <a href="#" class="auth-form__socials--google btn btn--size-s btn--with-icon">
-                                <i class="auth-form__socials-icon fa-brands fa-google"></i>
-                                <span class="auth-form__socials-title">Kết nối với Google</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="modal" id="modal_register" style="display: none;">
-                <div class="modal__overlay">
-                </div>
-                <div class="modal__body">
-                        <!-- Register form -->
-                    <div class="auth-form">
-                        <form class="auth-form__container" th:action="@{/register}" method="post" th:object="${userDto}">
-                            <div class="auth-form__header">
-                                <h3 class="auth-form__heading">Đăng ký</h3>
-                                <span class="auth-form__switch-btn" id="form__register-click">Đăng nhập</span>
-                            </div>
-                            
-                            <div class="auth-form__form">
-                                <div class="auth-form__group">
-                                    <input type="text" th:field="*{username}" class="auth-form__input" placeholder="Tài khoản">
-                                </div>
-                                <div class="auth-form__group">
-                                    <input type="password" th:field="*{password}" class="auth-form__input" placeholder="Mật khẩu">
-                                </div>
-                                <div class="auth-form__group">
-                                    <input type="password" th:field="*{retypePassword}" class="auth-form__input" placeholder="Nhập lại mật khẩu">
-                                </div>
-                            </div>
-                            <div class="auth-form__aside">
-                                <p class="auth-form__policy-text">
-                                    Bằng việc đăng ký, bạn đã đồng ý về 
-                                    <a href="#" class="auth-form__text-link">Điều khoản dịch vụ</a> & 
-                                    <a href="#" class="auth-form__text-link">Chính sách bảo mật</a>
-                                </p>
-                            </div>
-                            
-                            <div class="auth-form__controls">
-                                <button class="btn btn--normal auth-form__controls-back" id="form__register-cancel">TRỞ LẠI</button>
-                                <button type="submit" class="btn btn--primary">ĐĂNG KÝ</button>
-                            </div>
-                        </form>
-            
-                        <div class="auth-form__socials">
-                            <a href="#" class="auth-form__socials--facebook btn btn--size-s btn--with-icon">
-                                <i class="auth-form__socials-icon fa-brands fa-square-facebook"></i>
-                                <span class="auth-form__socials-title">Kết nối với Facebook</span>
-                            </a>
-                            <a href="#" class="auth-form__socials--google btn btn--size-s btn--with-icon">
-                                <i class="auth-form__socials-icon fa-brands fa-google"></i>
-                                <span class="auth-form__socials-title">Kết nối với Google</span>
-                            </a>
-                        </div>
-                    </div>                
-                </div>
-            </div>
-        </div>
     </div>
-    <script src="/assets/script/main.js"></script>
     <script>
         let inputElement = document.getElementById("header__search-input-id");
         let searchElement = document.getElementById("header__search-link-id");

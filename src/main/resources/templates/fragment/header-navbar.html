@@ -22,8 +22,10 @@
 
         <!-- none login -->
 
-        <li th:if="!${session.user}" class="header__navbar-item header__navbar-item--strong header__navbar-item--separate" id="navbar__register-form" >Đăng ký</li>
-        <li th:if="!${session.user}" class="header__navbar-item header__navbar-item--strong" id="navbar__login-form">Đăng nhập</li>
+        <li th:if="!${session.user}" class="header__navbar-item header__navbar-item--strong header__navbar-item--separate" id="navbar__register-form" >
+            <a href="/register">Đăng ký</a></li>
+        <li th:if="!${session.user}" class="header__navbar-item header__navbar-item--strong" id="navbar__login-form"><a
+                href="/login">Đăng nhập</a></li>
 
         <!-- Login successfuly -->
         <li class="header__navbar-item header_navbar-user" th:if="${session.user}">
@@ -35,8 +37,7 @@
                     <a href="">Tài khoản của tôi</a>
                     <a href="">Địa chỉ của tôi</a>
                     <a href="">Đơn mua</a>
-                    <form th:action="@{/logout}">
-                        <button type="submit">Đăng xuất</button></form>
+                    <a href="/logout">Đăng xuất</a>
                 </li>
             </ul>
         </li>

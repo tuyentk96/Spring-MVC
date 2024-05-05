@@ -38,12 +38,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return userDAO.findByUsername(username);
+        return userDAO.findUserByUsername(username);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDAO.findByUsername(username);
+        User user = userDAO.findUserByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password");
         }

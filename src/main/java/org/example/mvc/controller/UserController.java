@@ -4,26 +4,40 @@ package org.example.mvc.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.mvc.dto.UserDto;
 import org.example.mvc.service.UserService;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private  AuthenticationManager authenticationManager;
 
-    @PostMapping("/register")
-    public String register(@ModelAttribute UserDto userDto) {
-        userService.saveUser(userDto);
-        return "redirect:/index";
+
+    @GetMapping("/register")
+    public String regsiter(Model model){
+        UserDto userDto = new UserDto();
+        model.addAttribute("userDto", userDto);
+        return "register";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/register/confirm")
+    public String register(@ModelAttribute UserDto userDto) {
+        userService.saveUser(userDto);
+        return "redirect:/login";
+    }
+
+    @GetMapping("/login")
     public String login(){
-        return "redirect:/index";
+        return "login";
     }
 }

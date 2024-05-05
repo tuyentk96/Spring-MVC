@@ -43,6 +43,11 @@ html {
   min-height: 26px;
 }
 
+.header__navbar-item a {
+  text-decoration: none;
+  color: white;
+}
+
 .header_navbar-user {
   display: flex;
   justify-items: center;
@@ -101,6 +106,15 @@ html {
   font-size: 1.4rem;
   display: block;
   padding: 8px 16px;
+}
+
+.header__navbar-user-item button {
+  cursor: pointer;
+  border: none;
+}
+
+.header__navbar-user-item button:hover {
+  background-color: #ece3e3f8;
 }
 
 .header__navbar-user-item a:first-child {
@@ -494,6 +508,13 @@ html {
     animation: growth linear 0.1s;
 }
 
+.auth-form-fix {
+  background-color: rgba(0, 0, 0, 0.04);
+  margin: 36px auto;
+  width: 600px;
+  text-align: center;
+  font-size: 1.6rem;
+}
 
 /* Authen modal */
 .auth-form__container {
@@ -506,6 +527,11 @@ html {
   justify-content: space-between;
   padding: 0 12px;
   margin-top: 12px;
+}
+
+.auth-form__header a {
+  text-decoration: none;
+  color: var(--primary-color);
 }
 
 .auth-form__heading {
@@ -559,6 +585,11 @@ html {
 
 .auth-form__controls-back{
   margin-right: 8px;
+}
+
+.auth-form__controls-back a {
+  text-decoration: none;
+  color: var(--text-color);
 }
 
 .auth-form__socials {

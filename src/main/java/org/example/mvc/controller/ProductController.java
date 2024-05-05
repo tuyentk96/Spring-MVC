@@ -10,6 +10,7 @@ import org.example.mvc.service.ProductService;
 import org.springframework.boot.Banner;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,13 +28,15 @@ import java.util.List;
 public class ProductController {
     private final CategoryService categoryService;
     private final ProductService productService;
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("")
     public String productManager(Model model) {
         List<Product> products = productService.getAllProduct();
         model.addAttribute("products", products);
         return "product-manager";
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/add-product")
     public String addProduct(Model model){
         List<Category> categories = categoryService.getAllCategory();
@@ -48,6 +51,7 @@ public class ProductController {
         return "redirect:/product";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/add-product/process",method = RequestMethod.POST)
     public String addProductProcess(@Valid @ModelAttribute ProductDto productDto, BindingResult result,Model model) {
         String contentType = productDto.getImage().getContentType();
@@ -81,7 +85,7 @@ public class ProductController {
     }
 
 
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/fake")
     public String fake(){
         return "fake-product/fake";

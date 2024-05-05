@@ -6,7 +6,7 @@
     <title>Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="/assets/css/base.css">
-    <link rel="stylesheet" href="/assets/css/add-product.css">
+    <link rel="stylesheet" href="/assets/css/product-manager.css">
     <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.5.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,10 +32,8 @@
                 </div>
 
                 <div class="header__search">
-                    <input class="header__search-input" type="text" placeholder="Nhập để tìm kiếm sản phẩm">
-
-                    </input>
-                    <a href="#">
+                    <input  id="header__search-input-id" th:value="${keyword}" class="header__search-input" type="text" placeholder="Nhập để tìm kiếm sản phẩm">
+                    <a id="header__search-link-id" th:href="@{'index?category-id='+${categoryId}+'&sort='+${sort}}">
                         <button class="header__search-btn">
                             <i class="header__search-btn-icon fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -49,64 +47,46 @@
 
     <div class="app_container">
         <div class="navigate">
-            <a href="/index">Trang chủ </a><span> / </span><span class="navigate-current-page">Thêm sản phẩm</span>
-            <div class="btn navigate-product-manager"><a class="navigate-product-manager-link" href="/product">Trở lại quản lý sản phẩm</a></div>
+            <a href="/templates/home.html">Trang chủ </a><span> / </span><span class="navigate-current-page">Đăng nhập</span>
         </div>
-        <form th:action="@{/product/add-product/process}" enctype="multipart/form-data" th:object="${productDto}" method="POST">
-            <div class="new-product">
-                <div class="new-product-left">
-                    <div class="new-product-items">
-                        <label class="new-product-left-label" for="name">Tên sản phẩm</label>
-                        <input th:field="*{name}" id="name" type="text" placeholder="Nhập tên sản phẩm">
-                        <div class="new-product-items-errors" th:if="${#fields.hasErrors('name')}" th:each="e:${#fields.errors('name')}" th:text="${e}"></div>
-                    </div>
-                    <div class="new-product-items">
-                        <label class="new-product-left-label" for="image">Hình ảnh</label>
-                        <input th:field="*{image}" id="image" type="file">
-                        <div class="new-product-items-errors" th:if="${#fields.hasErrors('image')}" th:each="e:${#fields.errors('image')}" th:text="${e}"></div>
-                    </div>
-                    <div class="new-product-items">
-                        <label class="new-product-left-label" for="decription">Mô tả</label>
-                        <input th:field="*{description}" id="decription" type="text" placeholder="Nhập mô tả sản phẩm">
-                    </div>
-                    <div class="new-product-items">
-                        <label class="new-product-left-label" for="price">Giá</label>
-                        <input th:field="*{price}" id="price" type="text" placeholder="Nhập giá sản phẩm">
-                        <div class="new-product-items-errors" th:if="${#fields.hasErrors('price')}" th:each="e:${#fields.errors('price')}" th:text="${e}"></div>
-                    </div>
 
-                    <div class="new-product-items">
-                        <label class="new-product-left-label" for="category">Danh mục sản phẩm</label>
-                        <select th:field="*{categoryId}" class="new-product-select" name="" id="category">
-                            <option th:each="e:${categories}" th:value="${e.id}"><span th:text="${e.name}"></span></option>
-                        </select>
+        <div class="auth-form-fix">
+            <form class="auth-form__container"  method="post" th:action="@{/authenticatedTheUser}">
+                <div class="auth-form__header">
+                    <h3 class="auth-form__heading">Đăng nhập</h3>
+                    <a href="/register" class="auth-form__switch-btn" id="form__login-click">Đăng ký</a>
+                </div>
+
+                <div class="auth-form__form">
+                    <div class="auth-form__group">
+                        <input type="text" name="username"  id="username" class="auth-form__input" placeholder="Tài khoản">
+                    </div>
+                    <div class="auth-form__group">
+                        <input type="password" name="password" id="password" class="auth-form__input" placeholder="Mật khẩu">
                     </div>
                 </div>
-                <div class="new-product-right">
-                    <div class="new-product-items">
-                        <label class="new-product-right-label" for="sale">Giảm giá (%)</label>
-                        <input th:field="*{sale}" id="sale" type="text" placeholder="Nhập phân trăm giảm giá sản phẩm">
-                    </div>
-                    <div class="new-product-items">
-                        <label class="new-product-right-label" for="color">Màu sắc</label>
-                        <input id="color" th:field="*{color}" type="text" placeholder="Nhập màu sắc sản phẩm">
-                    </div>
-                    <div class="new-product-items">
-                        <label class="new-product-right-label" for="brand">Thương hiệu</label>
-                        <input id="brand" th:field="*{brand}" type="text" placeholder="Nhập thương hiệu sản phẩm">
-                        <div class="new-product-items-errors" th:if="${#fields.hasErrors('brand')}" th:each="e:${#fields.errors('brand')}" th:text="${e}"></div>
-                    </div>
-                    <div class="new-product-items">
-                        <label class="new-product-right-label" for="origin">Xuất sứ</label>
-                        <input id="origin" th:field="*{origin}" type="text" placeholder="Nhập xuất sứ sản phẩm">
-                        <div class="new-product-items-errors" th:if="${#fields.hasErrors('origin')}" th:each="e:${#fields.errors('origin')}" th:text="${e}"></div>
-                    </div>
-
-                    <button type="submit" class="btn new-product-button">Thêm sản phẩm</button>
+                <div class="auth-form__help">
+                    <a href="#" class="auth-form__help-link auth-form__help-forgot">Quên mật khẩu</a>
+                    <span class="auth-form__help-sperate"></span>
+                    <a href="#" class="auth-form__help-link">Cần trợ giúp?</a>
                 </div>
+
+                <div class="auth-form__controls">
+                    <button class="btn btn--normal auth-form__controls-back" id="form__login-cancel"><a href="/index">TRỞ LẠI</a></button>
+                    <button type="submit" class="btn btn--primary">ĐĂNG NHẬP</button>
+                </div>
+            </form>
+            <div class="auth-form__socials">
+                <a href="#" class="auth-form__socials--facebook btn btn--size-s btn--with-icon">
+                    <i class="auth-form__socials-icon fa-brands fa-square-facebook"></i>
+                    <span class="auth-form__socials-title">Kết nối với Facebook</span>
+                </a>
+                <a href="#" class="auth-form__socials--google btn btn--size-s btn--with-icon">
+                    <i class="auth-form__socials-icon fa-brands fa-google"></i>
+                    <span class="auth-form__socials-title">Kết nối với Google</span>
+                </a>
             </div>
-        </form>
-
+        </div>
 
     </div>
 
@@ -187,6 +167,8 @@
             </div>
         </div>
     </footer>
+
 </div>
+
 </body>
 </html>
