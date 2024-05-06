@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.example.mvc.dto.CartDto;
+import org.example.mvc.dto.OrderDto;
 import org.example.mvc.model.Product;
 import org.example.mvc.service.CartService;
 import org.example.mvc.service.ProductService;
@@ -50,12 +51,14 @@ public class CartController {
 
     @RequestMapping("/cart")
     public String cart(HttpSession session,Model model){
+        OrderDto orderDto = new OrderDto();
         HashMap<Long, CartDto> cart = (HashMap<Long, CartDto>) session.getAttribute("Cart");
         if (cart==null){
             cart = new HashMap<Long,CartDto>();
         }
         float totalPrice = cartService.totalPrice(cart);
         model.addAttribute("totalPrice",totalPrice);
+        model.addAttribute("orderDto",orderDto);
         return "cart";
     }
 }

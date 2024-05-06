@@ -32,8 +32,10 @@
                 </div>
 
                 <div class="header__search">
-                    <input  id="header__search-input-id" th:value="${keyword}" class="header__search-input" type="text" placeholder="Nhập để tìm kiếm sản phẩm">
-                    <a id="header__search-link-id" th:href="@{'index?category-id='+${categoryId}+'&sort='+${sort}}">
+                    <input class="header__search-input" type="text" placeholder="Nhập để tìm kiếm sản phẩm">
+
+                    </input>
+                    <a href="#">
                         <button class="header__search-btn">
                             <i class="header__search-btn-icon fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -47,54 +49,47 @@
 
     <div class="app_container">
         <div class="navigate">
-            <a href="/templates/home.html">Trang chủ </a><span> / </span><span class="navigate-current-page">Đăng ký</span>
+            <a href="/index">Trang chủ </a><span> / </span><span class="navigate-current-page">Đơn hàng của tôi</span>
         </div>
 
-        <div class="auth-form-fix">
-            <form class="auth-form__container" th:action="@{/register/confirm}" method="post" th:object="${userDto}">
-                <div class="auth-form__header">
-                    <h3 class="auth-form__heading">Đăng ký</h3>
-                    <a href="/login" class="auth-form__switch-btn" id="form__register-click">Đăng nhập</a>
-                </div>
+        <div class="products-list" th:each="order:${orders}">
+            <table class="product">
 
-                <div class="auth-form__form">
-                    <div class="auth-form__group">
-                        <input type="text" th:field="*{username}" class="auth-form__input" placeholder="Tài khoản">
-                        <span th:if="${#fields.hasErrors('username')}" th:each="e:${#fields.errors('username')}" th:text="${e}"></span>
-                    </div>
-                    <div class="auth-form__group">
-                        <input type="password" th:field="*{password}" class="auth-form__input" placeholder="Mật khẩu">
-                        <span th:if="${#fields.hasErrors('password')}" th:each="e:${#fields.errors('password')}" th:text="${e}"></span>
-                    </div>
-                    <div class="auth-form__group">
-                        <input type="password" th:field="*{retypePassword}" class="auth-form__input" placeholder="Nhập lại mật khẩu">
-                        <span th:if="${#fields.hasErrors('retypePassword')}" th:each="e:${#fields.errors('retypePassword')}" th:text="${e}"></span>
-                    </div>
-                </div>
+                <div>Mã order: <span th:text="${order.id}"></span></div>
+                <div>Địa chỉ: <span th:text="${order.address}"></span></div>
+                <div>Note: <span th:text="${order.note}"></span></div>
 
-                <div class="auth-form__aside">
-                    <p class="auth-form__policy-text">
-                        Bằng việc đăng ký, bạn đã đồng ý về
-                        <a href="#" class="auth-form__text-link">Điều khoản dịch vụ</a> &
-                        <a href="#" class="auth-form__text-link">Chính sách bảo mật</a>
-                    </p>
+                <thead class="product-head">
+                <tr>
+                    <th class="product-head-items">Mã sản phẩm</th>
+                    <th class="product-head-items">Hình ảnh</th>
+                    <th class="product-head-items">Tên sản phẩm</th>
+                    <th class="product-head-items">Mô tả</th>
+                    <th class="product-head-items">Giá</th>
+                    <th class="product-head-items">Số lượng</th>
+                    <th class="product-head-items">Màu sắc</th>
+                    <th class="product-head-items">Thương hiệu</th>
+                    <th class="product-head-items">Xuất xứ</th>
+                </tr>
+                </thead>
+                <div>
+                    <tbody class="product-body">
+                    <div th:each="cartItem:${order.orderDetails}">
+                        <tr>
+                            <td class="product-body-items"><span th:text="${cartItem.product.id}"></span></td>
+                            <td class="product-body-items"><img class="product-body-items-img" th:src="@{'/assets/img/'+${cartItem.product.image}}" alt=""></td>
+                            <td class="product-body-items" th:text="${cartItem.product.name}"></td>
+                            <td class="product-body-items" th:text="${cartItem.product.description}"></td>
+                            <td class="product-body-items" th:text="${#numbers.formatDecimal(cartItem.product.price - cartItem.product.price*cartItem.product.sale/100, 0, 'COMMA', 0, 'POINT')} + ' ₫'"></td>
+                            <td class="product-body-items" th:text="${cartItem.quantity}"></td>
+                            <td class="product-body-items" th:text="${cartItem.product.color}"></td>
+                            <td class="product-body-items" th:text="${cartItem.product.brand}"></td>
+                            <td class="product-body-items" th:text="${cartItem.product.origin}"></td>
+                        </tr>
+                    </div>
+                    </tbody>
                 </div>
-
-                <div class="auth-form__controls">
-                    <button class="btn btn--normal auth-form__controls-back" id="form__register-cancel"><a href="/index">TRỞ LẠI</a></button>
-                    <button type="submit" class="btn btn--primary">ĐĂNG KÝ</button>
-                </div>
-            </form>
-            <div class="auth-form__socials">
-                <a href="#" class="auth-form__socials--facebook btn btn--size-s btn--with-icon">
-                    <i class="auth-form__socials-icon fa-brands fa-square-facebook"></i>
-                    <span class="auth-form__socials-title">Kết nối với Facebook</span>
-                </a>
-                <a href="#" class="auth-form__socials--google btn btn--size-s btn--with-icon">
-                    <i class="auth-form__socials-icon fa-brands fa-google"></i>
-                    <span class="auth-form__socials-title">Kết nối với Google</span>
-                </a>
-            </div>
+            </table>
         </div>
 
     </div>
@@ -176,6 +171,7 @@
             </div>
         </div>
     </footer>
+
 
 </div>
 

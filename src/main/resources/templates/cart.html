@@ -99,16 +99,19 @@
                 </table>
                 
             </div>
-            <form action="#" class="form-cart">
+            <form action="/order-success" method="post" class="form-cart" th:object="${orderDto}">
                 <div class="form-cart-list">
                     <label for="address" class="">Địa chỉ: </label>
-                    <input id="address" type="text" placeholder="Nhập địa chỉ nhận hàng">
+                    <input th:field="*{address}" id="address" type="text" placeholder="Nhập địa chỉ nhận hàng">
+                    <p class="error-address" th:if="${#fields.hasErrors('address')}" th:each="e:${#fields.errors('address')}" th:text="${e}"></p>
+
                 </div>
                 <div class="form-cart-list">
                     <label for="note" class="">Chú thích: </label>
-                    <input id="note" type="text" placeholder="Nhập chú thích/yêu cầu người gửi hàng">
+                    <input th:field="*{note}" id="note" type="text" placeholder="Nhập chú thích/yêu cầu người gửi hàng">
                 </div>
-                <button class="btn btn--primary" type="submit">THANH TOÁN</button>
+                <button th:if="${session.user}"  class="btn btn--primary" type="submit">THANH TOÁN</button>
+                <button th:if="!${session.user}" class="btn btn--primary"><a href="/login">Bạn cần đăng nhập để thanh toán</a></button>
         </form>
         </div>
 

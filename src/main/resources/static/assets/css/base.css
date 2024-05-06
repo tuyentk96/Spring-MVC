@@ -908,3 +908,6 @@ html {
   color: var(--white-color);
 }
 
+.auth-form__form span {
+  color: red;
+}
